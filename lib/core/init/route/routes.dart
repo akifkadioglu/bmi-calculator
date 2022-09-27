@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/core/constant/UI/animation_constants.dart';
 import 'package:bmi_calculator/core/constant/route/route_names.dart';
 import 'package:bmi_calculator/core/constant/transition/transition_constant.dart';
 import 'package:bmi_calculator/view/info/info_view.dart';
@@ -20,7 +21,7 @@ GetPage<dynamic> buildRoutePage(String path, Widget page) {
   return GetPage(
     name: path,
     page: () => page,
-    curve: Curves.easeInQuart,
+    curve: AnimationConstants.curve,
     transition: TransitionConstant.transitionForPage,
     transitionDuration: TransitionConstant.durationForPage,
   );

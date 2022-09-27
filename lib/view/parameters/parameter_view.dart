@@ -1,4 +1,6 @@
+import 'package:bmi_calculator/core/animation/animated_clip_rect.dart';
 import 'package:bmi_calculator/core/base/state/base_state.dart';
+import 'package:bmi_calculator/core/constant/UI/animation_constants.dart';
 import 'package:bmi_calculator/core/constant/UI/padding.dart';
 import 'package:bmi_calculator/core/constant/UI/text_field_decoration.dart';
 import 'package:bmi_calculator/core/constant/language/lang.dart';
@@ -28,6 +30,7 @@ class _ParameterPageState extends BaseState<ParameterPage> {
         child: Obx(
           () => Column(
             children: [
+              buildTopPadding(),
               Padding(
                 padding: Paddings.textFormField,
                 child: Column(
@@ -35,13 +38,21 @@ class _ParameterPageState extends BaseState<ParameterPage> {
                   children: [
                     buildHeight(controller.isMetricUnit.value ? 'cm'.tr : 'in'.tr),
                     SizedBox(
-                      height: dynamicHeight(0.05),
+                      height: dynamicHeight(0.02),
                     ),
                     buildWeight(controller.isMetricUnit.value ? 'kg'.tr : 'lbs'.tr),
+                    SizedBox(
+                      height: dynamicHeight(0.02),
+                    ),
                   ],
                 ),
               ),
-              buildSwitchUnit()
+              buildTopPadding(),
+              buildSwitchUnit(),
+              const SizedBox(
+                height: 5,
+              ),
+              buildSwitchGender()
             ],
           ),
         ),
@@ -49,6 +60,12 @@ class _ParameterPageState extends BaseState<ParameterPage> {
       bottomNavigationBar: const ResultPage(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: buildFloatActionButton(context),
+    );
+  }
+
+  SizedBox buildTopPadding() {
+    return SizedBox(
+      height: dynamicHeight(0.15),
     );
   }
 
@@ -74,6 +91,7 @@ class _ParameterPageState extends BaseState<ParameterPage> {
         onPressed: () {
           controller.isResultOpen.value = !controller.isResultOpen.value;
           controller.calculateBMI();
+          controller.calculateIdealFat();
         },
         child: const Icon(
           Icons.accessibility_new_sharp,
@@ -83,13 +101,63 @@ class _ParameterPageState extends BaseState<ParameterPage> {
     );
   }
 
-  Row buildSwitchUnit() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        buildUnitButton(LanguageConstant.METRIC_UNITS.tr, controller.isMetricUnit.isTrue, true),
-        buildUnitButton(LanguageConstant.US_UNITS.tr, controller.isMetricUnit.isFalse, false),
-      ],
+  AnimatedClipRect buildSwitchUnit() {
+    return AnimatedClipRect(
+      duration: AnimationConstants.duration,
+      curve: AnimationConstants.curve,
+      reverseDuration: AnimationConstants.duration,
+      reverseCurve: AnimationConstants.curve,
+      open: !controller.isResultOpen.value,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          buildUnitButton(LanguageConstant.METRIC_UNITS.tr, controller.isMetricUnit.isTrue, true),
+          buildUnitButton(LanguageConstant.US_UNITS.tr, controller.isMetricUnit.isFalse, false),
+        ],
+      ),
+    );
+  }
+
+  AnimatedClipRect buildSwitchGender() {
+    return AnimatedClipRect(
+      duration: AnimationConstants.duration,
+      curve: AnimationConstants.curve,
+      reverseDuration: AnimationConstants.duration,
+      reverseCurve: AnimationConstants.curve,
+      open: !controller.isResultOpen.value,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          buildGenderButton(LanguageConstant.MALE.tr, controller.isMale.isTrue, true, Colors.blue),
+          buildGenderButton(LanguageConstant.FEMALE.tr, controller.isMale.isFalse, false, Colors.pink),
+        ],
+      ),
+    );
+  }
+
+  SizedBox buildGenderButton(String label, bool isMale, bool type, Color color) {
+    return SizedBox(
+      height: 50,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: color.withOpacity(isMale ? 1 : 0.3),
+          elevation: 0,
+          shadowColor: Colors.transparent,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.zero,
+          ),
+        ),
+        onPressed: () {
+          controller.isMale.value = type;
+        },
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(LanguageConstant.MALE.tr == label ? Icons.male : Icons.female),
+            Text(label),
+          ],
+        ),
+      ),
     );
   }
 
@@ -119,6 +187,7 @@ class _ParameterPageState extends BaseState<ParameterPage> {
       children: [
         Expanded(
           child: TextFormField(
+            textInputAction: TextInputAction.next,
             onChanged: (value) {
               controller.height.value = double.tryParse(value.replaceAll(",", "")) ?? 0.0;
             },

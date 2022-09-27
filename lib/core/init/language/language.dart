@@ -10,6 +10,7 @@ class Messages extends Translations {
           'gender': 'Gender',
           'us_units': 'US units',
           'metric_units': 'Metric units',
+          'age': 'Age',
         },
         'de_DE': {
           'bmi': 'Body-Mass-Index',
@@ -18,6 +19,7 @@ class Messages extends Translations {
           'gender': 'Geschlecht',
           'us_units': 'US-Einheiten',
           'metric_units': 'Metrische Einheiten',
+          'age': 'das Alter',
         },
         'tr_TR': {
           'bmi': 'Vücut kitle indeksi',
@@ -26,6 +28,7 @@ class Messages extends Translations {
           'gender': 'Cinsiyet',
           'us_units': 'ABD birimleri',
           'metric_units': 'Metrik birimler',
+          'age': 'Yaş',
         },
         'fr_FR': {
           'bmi': 'Indice de masse corporelle',
@@ -34,6 +37,7 @@ class Messages extends Translations {
           'gender': 'Le genre',
           'us_units': 'Unités américaines',
           'metric_units': 'Unités métriques',
+          'age': 'Âge',
         },
         'es_ES': {
           'bmi': 'Índice de masa corporal',
@@ -42,6 +46,7 @@ class Messages extends Translations {
           'gender': 'Género',
           'us_units': 'Unidades estadounidenses',
           'metric_units': 'Unidades metricas',
+          'age': 'Años',
         }
       };
 }

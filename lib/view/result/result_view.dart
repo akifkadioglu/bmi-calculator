@@ -1,4 +1,5 @@
 import 'package:bmi_calculator/core/base/state/base_state.dart';
+import 'package:bmi_calculator/core/constant/UI/animation_constants.dart';
 import 'package:bmi_calculator/view/view-controller/app_view_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,9 +30,9 @@ class _ResultPageState extends BaseState<ResultPage> {
           }
         },
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 1200),
+          duration: AnimationConstants.duration,
           height: dynamicHeight(controller.bottomAppBar.value),
-          curve: Curves.elasticInOut,
+          curve: AnimationConstants.curve,
           child: BottomAppBar(
             color: Theme.of(context).primaryColor,
             shape: const CircularNotchedRectangle(),
@@ -47,11 +48,42 @@ class _ResultPageState extends BaseState<ResultPage> {
                       SizedBox(
                         height: dynamicHeight(0.1),
                       ),
-                      Text(
-                        controller.result.toString(),
-                        style: Theme.of(context).textTheme.headline3?.copyWith(
+                      Column(
+                        children: [
+                          Text(
+                            controller.result.toString(),
+                            style: Theme.of(context).textTheme.headline1?.copyWith(
+                                  color: Colors.white,
+                                ),
+                          ),
+                          Text(
+                            'bmi'.tr,
+                            style: const TextStyle(
                               color: Colors.white,
                             ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: dynamicHeight(0.1),
+                      ),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            controller.idealFat.toString(),
+                            style: Theme.of(context).textTheme.headline3?.copyWith(
+                                  fontWeight: FontWeight.w200,
+                                  color: Colors.white,
+                                ),
+                          ),
+                          Text(
+                            'ideal_fat'.tr,
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
