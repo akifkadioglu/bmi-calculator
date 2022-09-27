@@ -8,15 +8,15 @@ class AppViewConroller extends GetxController {
   RxBool isMetricUnit = true.obs;
   RxBool isMale = true.obs;
   RxDouble result = 0.0.obs;
-  RxDouble idealFat = 0.0.obs;
-  void calculateIdealFat() {
+  RxDouble idealWeight = 0.0.obs;
+  void calculateidealWeight() {
     double heightValue = isMetricUnit.value ? (height.value * 0.3937) : height.value;
     if (isMale.value && heightValue > 0) {
-      idealFat.value = 50 + 2.3 * (heightValue - 60);
+      idealWeight.value = 50 + 2.3 * (heightValue - 60);
     } else if (heightValue > 0) {
-      idealFat.value = 45.5 + 2.3 * (heightValue - 60);
+      idealWeight.value = 45.5 + 2.3 * (heightValue - 60);
     }
-    idealFat.value = idealFat.value > 0 ? double.tryParse(idealFat.value.toStringAsFixed(2)) ?? 0.0 : 0.0;
+    idealWeight.value = idealWeight.value > 0 ? double.tryParse(idealWeight.value.toStringAsFixed(2)) ?? 0.0 : 0.0;
   }
 
   void calculateBMI() {

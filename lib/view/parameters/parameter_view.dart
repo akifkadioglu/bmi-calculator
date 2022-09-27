@@ -50,7 +50,7 @@ class _ParameterPageState extends BaseState<ParameterPage> {
               buildTopPadding(),
               buildSwitchUnit(),
               const SizedBox(
-                height: 5,
+                height: 7,
               ),
               buildSwitchGender()
             ],
@@ -91,7 +91,7 @@ class _ParameterPageState extends BaseState<ParameterPage> {
         onPressed: () {
           controller.isResultOpen.value = !controller.isResultOpen.value;
           controller.calculateBMI();
-          controller.calculateIdealFat();
+          controller.calculateidealWeight();
         },
         child: const Icon(
           Icons.accessibility_new_sharp,

@@ -71,14 +71,14 @@ class _ResultPageState extends BaseState<ResultPage> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            controller.idealFat.toString(),
+                            controller.idealWeight.toString(),
                             style: Theme.of(context).textTheme.headline3?.copyWith(
                                   fontWeight: FontWeight.w200,
                                   color: Colors.white,
                                 ),
                           ),
                           Text(
-                            'ideal_fat'.tr,
+                            'ideal_weight'.tr,
                             style: const TextStyle(
                               color: Colors.white,
                             ),
