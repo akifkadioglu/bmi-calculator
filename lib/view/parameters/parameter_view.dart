@@ -1,8 +1,11 @@
-import 'package:bmi_calculator/core/constant/UI/border_constants.dart';
+import 'package:bmi_calculator/core/base/state/base_state.dart';
 import 'package:bmi_calculator/core/constant/UI/padding.dart';
+import 'package:bmi_calculator/core/constant/UI/text_field_decoration.dart';
 import 'package:bmi_calculator/core/constant/language/lang.dart';
 import 'package:bmi_calculator/core/constant/route/route_names.dart';
+import 'package:bmi_calculator/core/constant/theme/theme.dart';
 import 'package:bmi_calculator/core/init/route/route_manager.dart';
+import 'package:bmi_calculator/view/result/result_view.dart';
 import 'package:bmi_calculator/view/view-controller/app_view_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,28 +17,13 @@ class ParameterPage extends StatefulWidget {
   State<ParameterPage> createState() => _ParameterPageState();
 }
 
-class _ParameterPageState extends State<ParameterPage> {
+class _ParameterPageState extends BaseState<ParameterPage> {
   AppViewConroller controller = Get.put(AppViewConroller());
-  double dynamicWidth(double value) {
-    return MediaQuery.of(context).size.width * value;
-  }
-
-  double dynamicHeight(double value) {
-    return MediaQuery.of(context).size.height * value;
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(LanguageConstant.BMI.tr),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.info_outline),
-          ),
-        ],
-      ),
+      appBar: buildAppBar(),
       body: SingleChildScrollView(
         child: Obx(
           () => Column(
@@ -45,82 +33,114 @@ class _ParameterPageState extends State<ParameterPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    buildTextField(controller.height.value),
+                    buildHeight(controller.isMetricUnit.value ? 'cm'.tr : 'in'.tr),
                     SizedBox(
                       height: dynamicHeight(0.05),
                     ),
-                    buildTextField(controller.weight.value),
+                    buildWeight(controller.isMetricUnit.value ? 'kg'.tr : 'lbs'.tr),
                   ],
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(LanguageConstant.US_UNITS.tr),
-                  Switch(
-                      value: controller.isUsMetric.value,
-                      onChanged: (e) {
-                        controller.isUsMetric.value = e;
-                      }),
-                  Text(LanguageConstant.METRIC_UNITS.tr),
-                ],
-              )
+              buildSwitchUnit()
             ],
           ),
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        color: Theme.of(context).primaryColor,
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 10,
-        elevation: 0,
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(
-              height: dynamicHeight(0.07),
-            )
-          ],
-        ),
-      ),
+      bottomNavigationBar: const ResultPage(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Visibility(
-        visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
-        child: FloatingActionButton(
-          elevation: 0,
+      floatingActionButton: buildFloatActionButton(context),
+    );
+  }
+
+  AppBar buildAppBar() {
+    return AppBar(
+      title: Text(LanguageConstant.BMI.tr),
+      actions: [
+        IconButton(
           onPressed: () {
-            RouteManager.normalRoute(RouteNames.RESULT_PAGE);
+            RouteManager.normalRoute(RouteNames.INFO_PAGE);
           },
-          child: const Icon(
-            Icons.accessibility_new_sharp,
-            color: Colors.white,
-          ),
+          icon: const Icon(Icons.info_outline),
+        ),
+      ],
+    );
+  }
+
+  Visibility buildFloatActionButton(BuildContext context) {
+    return Visibility(
+      visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
+      child: FloatingActionButton(
+        elevation: 0,
+        onPressed: () {
+          controller.isResultOpen.value = !controller.isResultOpen.value;
+          controller.calculateBMI();
+        },
+        child: const Icon(
+          Icons.accessibility_new_sharp,
+          color: Colors.white,
         ),
       ),
     );
   }
 
-  Row buildTextField(double controllerValue) {
+  Row buildSwitchUnit() {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        buildUnitButton(LanguageConstant.METRIC_UNITS.tr, controller.isMetricUnit.isTrue, true),
+        buildUnitButton(LanguageConstant.US_UNITS.tr, controller.isMetricUnit.isFalse, false),
+      ],
+    );
+  }
+
+  SizedBox buildUnitButton(String label, bool isMetricUnit, bool type) {
+    return SizedBox(
+      height: 50,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: theme.primaryColor.withOpacity(isMetricUnit ? 1 : 0.3),
+          elevation: 0,
+          shadowColor: Colors.transparent,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.zero,
+          ),
+        ),
+        onPressed: () {
+          controller.isMetricUnit.value = type;
+        },
+        child: Text(label),
+      ),
+    );
+  }
+
+  Row buildHeight(String label) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Expanded(
           child: TextFormField(
             onChanged: (value) {
-              controllerValue = double.parse(value.replaceAll(",", ""));
+              controller.height.value = double.tryParse(value.replaceAll(",", "")) ?? 0.0;
             },
-            decoration: InputDecoration(
-              contentPadding: Paddings.contentPaddingForTextField,
-              focusedBorder: BorderConstant.textBorder,
-              enabledBorder: BorderConstant.textBorder,
-            ),
+            decoration: TextFieldDecoration().decoration(label),
             keyboardType: TextInputType.number,
           ),
         ),
-        SizedBox(
-          width: dynamicWidth(0.12),
-          child: Center(
-            child: Text(controller.isUsMetric.value ? 'inç' : 'santim'),
+      ],
+    );
+  }
+
+  Row buildWeight(String label) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Expanded(
+          child: TextFormField(
+            onChanged: (value) {
+              controller.weight.value = double.tryParse(value.replaceAll(",", "")) ?? 0.0;
+            },
+            decoration: TextFieldDecoration().decoration(label),
+            keyboardType: TextInputType.number,
           ),
         ),
       ],

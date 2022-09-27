@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:bmi_calculator/core/constant/language/lang.dart';
 import 'package:bmi_calculator/core/constant/language/locale_lang.dart';
 import 'package:bmi_calculator/core/constant/route/route_names.dart';
 import 'package:bmi_calculator/core/constant/theme/theme.dart';
@@ -11,9 +12,14 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -21,7 +27,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       locale: Locale(Platform.localeName),
       fallbackLocale: LocaleLanguage.ENGLISH,
-      title: 'bmi'.tr,
+      title: LanguageConstant.BMI.tr,
       initialRoute: RouteNames.PARAMETER_PAGE,
       theme: theme,
       getPages: routeList,

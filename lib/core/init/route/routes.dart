@@ -1,7 +1,7 @@
 import 'package:bmi_calculator/core/constant/route/route_names.dart';
 import 'package:bmi_calculator/core/constant/transition/transition_constant.dart';
+import 'package:bmi_calculator/view/info/info_view.dart';
 import 'package:bmi_calculator/view/parameters/parameter_view.dart';
-import 'package:bmi_calculator/view/result/result_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,8 +11,8 @@ List<GetPage> routeList = [
     const ParameterPage(),
   ),
   buildRoutePage(
-    RouteNames.RESULT_PAGE,
-    const ResultPage(),
+    RouteNames.INFO_PAGE,
+    const InfoPage(),
   ),
 ];
 
@@ -20,7 +20,7 @@ GetPage<dynamic> buildRoutePage(String path, Widget page) {
   return GetPage(
     name: path,
     page: () => page,
-    curve: Curves.easeInSine,
+    curve: Curves.easeInQuart,
     transition: TransitionConstant.transitionForPage,
     transitionDuration: TransitionConstant.durationForPage,
   );

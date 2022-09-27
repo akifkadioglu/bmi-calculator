@@ -1,4 +1,4 @@
 class RouteNames {
   static String PARAMETER_PAGE = '/';
-  static String RESULT_PAGE = '/result';
+  static String INFO_PAGE = '/info';
 }

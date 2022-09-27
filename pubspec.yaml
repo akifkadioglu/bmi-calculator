@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.6.5
   dropdown_plus: ^0.0.9
+  drop_down_list: ^0.0.4
 
 dev_dependencies:
   flutter_test:
