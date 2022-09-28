@@ -13,6 +13,14 @@ class Messages extends Translations {
           'age': 'Age',
           'ideal_weight': 'Ideal weight',
           'information': 'Information',
+          'thin': 'Thin',
+          'normal': 'Normal',
+          'overweight': 'Overweight',
+          'fat': 'Fat',
+          'obese_1': 'Obese type 1',
+          'obese_2': 'Obese type 2',
+          'about_bmi':
+              'It is a parameter that shows whether the weight of an adult person is normal for their height. In the Body Mass Index table seen above, it can be determined whether the weight is ideal with the area inside the intersection of weight and height. If your current weight is below or above the ideal, the way to reach the ideal point is not to lose or gain a lot of weight in a short time, but to reach a healthy weight step by step and to maintain this level in the long.',
         },
         'de_DE': {
           'bmi': 'Body-Mass-Index',
@@ -24,6 +32,14 @@ class Messages extends Translations {
           'age': 'das Alter',
           'ideal_weight': 'Idealgewicht',
           'information': 'Information',
+          'thin': 'Fleischlos',
+          'normal': 'Normal',
+          'overweight': 'Übergewicht',
+          'fat': 'Fett',
+          'obese_1': '1. Klasse fettleibig',
+          'obese_2': '2. Klasse fettleibig',
+          'about_bmi':
+              'Es ist ein Parameter, der angibt, ob das Gewicht eines Erwachsenen für seine Größe normal ist. Ob das Intervall zwischen Gewicht und Körpergröße ideal ist, lässt sich aus der Body-Mass-Index-Tabelle oben entnehmen. Wenn Ihr aktuelles Gewicht unter oder über dem Ideal liegt, ist der Weg zum Idealpunkt nicht, in kurzer Zeit zu viel ab- oder zuzunehmen, sondern Schritt für Schritt ein gesundes Gewicht zu erreichen und dieses Niveau lange zu halten.',
         },
         'tr_TR': {
           'bmi': 'Vücut kitle indeksi',
@@ -35,6 +51,14 @@ class Messages extends Translations {
           'age': 'Yaş',
           'ideal_weight': 'İdeal ağırlık',
           'information': 'Bilgi',
+          'thin': 'Zayıf',
+          'normal': 'Normal',
+          'overweight': 'Kilolu',
+          'fat': 'Aşırı kilolu',
+          'obese_1': '1. sınıf Obez',
+          'obese_2': '2. sınıf Obez',
+          'about_bmi':
+              'Yetişkin bir kişinin kilosunun boyuna göre normal olup olmadığını gösteren bir parametredir. Yukarıda görülen Beden Kitle İndeksi tablosunda, kilo ve boy kesişimindeki alan ile kilonun ideal olup olmadığı belirlenebilir. Mevcut kilonuz idealin altında veya üstündeyse ideal noktaya ulaşmanın yolu kısa sürede çok kilo vermek veya çok kilo almak değil, adım adım sağlıklı kiloya ulaşmak ve uzun vadede bu seviyeyi korumaktır.',
         },
         'fr_FR': {
           'bmi': 'Indice de masse corporelle',
@@ -46,6 +70,14 @@ class Messages extends Translations {
           'age': 'Âge',
           'ideal_weight': 'Poids idéal',
           'information': 'Information',
+          'thin': 'Rachitique',
+          'normal': 'Normal',
+          'overweight': 'Gros',
+          'fat': 'En surpoids',
+          'obese_1': 'Obèses de 1ère classe',
+          'obese_2': 'Obèse de 2e année',
+          'about_bmi':
+              "C'est un paramètre qui indique si le poids d'un adulte est normal pour sa taille. Si la fourchette entre le poids et la taille est idéale, on peut le voir dans le tableau d'indice de masse corporelle ci-dessus. Si votre poids actuel est inférieur ou supérieur à votre poids idéal, le moyen d'atteindre le point idéal n'est pas de perdre ou de gagner trop en peu de temps, mais d'atteindre un poids santé étape par étape et de le maintenir longtemps.",
         },
         'es_ES': {
           'bmi': 'Índice de masa corporal',
@@ -57,6 +89,14 @@ class Messages extends Translations {
           'age': 'Años',
           'ideal_weight': 'Peso ideal',
           'information': 'Información',
+          'thin': 'Raquítico',
+          'normal': 'Normal',
+          'overweight': 'Gordo',
+          'fat': 'Exceso de peso',
+          'obese_1': 'Obeso de primera clase',
+          'obese_2': 'Obeso de segundo grado',
+          'about_bmi':
+              'Es un parámetro que indica si el peso de un adulto es normal para su estatura. Si el intervalo entre el peso y la altura es ideal se puede ver en la tabla de índice de masa corporal anterior. Si su peso actual está por debajo o por encima del ideal, la forma de llegar al punto ideal no es perder o ganar demasiado en poco tiempo, sino alcanzar un peso saludable paso a paso y mantener ese nivel durante mucho tiempo.',
         }
       };
 }
