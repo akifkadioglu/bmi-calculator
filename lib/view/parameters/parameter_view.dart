@@ -2,6 +2,7 @@ import 'package:bmi_calculator/core/animation/animated_clip_rect.dart';
 import 'package:bmi_calculator/core/base/state/base_state.dart';
 import 'package:bmi_calculator/core/base/view/base_view.dart';
 import 'package:bmi_calculator/core/constant/UI/animation_constants.dart';
+import 'package:bmi_calculator/core/constant/UI/button_constants.dart';
 import 'package:bmi_calculator/core/constant/UI/padding.dart';
 import 'package:bmi_calculator/core/constant/UI/text_field_decoration.dart';
 import 'package:bmi_calculator/core/constant/language/lang.dart';
@@ -58,8 +59,8 @@ class _ParameterPageState extends BaseState<ParameterPage> {
   }
 
   SizedBox buildPadding() {
-    return const SizedBox(
-      height: 15,
+    return SizedBox(
+      height: Paddings.distance,
     );
   }
 
@@ -81,7 +82,7 @@ class _ParameterPageState extends BaseState<ParameterPage> {
     return Visibility(
       visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
       child: FloatingActionButton(
-        elevation: 0,
+        elevation: ButtonsConstants.elevation,
         onPressed: () {
           controller.isResultOpen.value = !controller.isResultOpen.value;
           controller.calculateBMI();
@@ -131,11 +132,11 @@ class _ParameterPageState extends BaseState<ParameterPage> {
 
   SizedBox buildGenderButton(String label, bool isMale, bool type, Color color) {
     return SizedBox(
-      height: 50,
+      height: ButtonsConstants.height,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: color.withOpacity(isMale ? 1 : 0.3),
-          elevation: 0,
+          primary: color.withOpacity(isMale ? ButtonsConstants.selected : ButtonsConstants.unSelected),
+          elevation: ButtonsConstants.elevation,
           shadowColor: Colors.transparent,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.zero,
@@ -157,11 +158,12 @@ class _ParameterPageState extends BaseState<ParameterPage> {
 
   SizedBox buildUnitButton(String label, bool isMetricUnit, bool type) {
     return SizedBox(
-      height: 50,
+      height: ButtonsConstants.height,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: theme.primaryColor.withOpacity(isMetricUnit ? 1 : 0.3),
-          elevation: 0,
+          primary:
+              theme.primaryColor.withOpacity(isMetricUnit ? ButtonsConstants.selected : ButtonsConstants.unSelected),
+          elevation: ButtonsConstants.elevation,
           shadowColor: Colors.transparent,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.zero,

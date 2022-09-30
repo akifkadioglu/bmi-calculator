@@ -9,4 +9,5 @@ class Paddings {
   static EdgeInsets contentPaddingForTextField = const EdgeInsets.only(left: 20);
   static EdgeInsetsDirectional unitBox = const EdgeInsetsDirectional.only(end: 10);
   static EdgeInsets infoText = const EdgeInsets.symmetric(horizontal: 30, vertical: 30);
+  static double distance = 15;
 }
