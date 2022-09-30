@@ -1,5 +1,6 @@
 import 'package:bmi_calculator/core/base/state/base_state.dart';
 import 'package:bmi_calculator/core/constant/UI/animation_constants.dart';
+import 'package:bmi_calculator/core/constant/language/lang.dart';
 import 'package:bmi_calculator/view/view-controller/app_view_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -57,7 +58,7 @@ class _ResultPageState extends BaseState<ResultPage> {
                                 ),
                           ),
                           Text(
-                            'bmi'.tr,
+                            LanguageConstant.BMI.tr,
                             style: const TextStyle(
                               color: Colors.white,
                             ),
@@ -78,7 +79,7 @@ class _ResultPageState extends BaseState<ResultPage> {
                                 ),
                           ),
                           Text(
-                            'ideal_weight'.tr,
+                            LanguageConstant.IDEAL_WEIGHT.tr,
                             style: const TextStyle(
                               color: Colors.white,
                             ),

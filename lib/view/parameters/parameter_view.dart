@@ -1,5 +1,6 @@
 import 'package:bmi_calculator/core/animation/animated_clip_rect.dart';
 import 'package:bmi_calculator/core/base/state/base_state.dart';
+import 'package:bmi_calculator/core/base/view/base_view.dart';
 import 'package:bmi_calculator/core/constant/UI/animation_constants.dart';
 import 'package:bmi_calculator/core/constant/UI/padding.dart';
 import 'package:bmi_calculator/core/constant/UI/text_field_decoration.dart';
@@ -24,48 +25,41 @@ class _ParameterPageState extends BaseState<ParameterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: buildAppBar(),
-      body: SingleChildScrollView(
-        child: Obx(
-          () => Column(
-            children: [
-              buildTopPadding(),
-              Padding(
-                padding: Paddings.textFormField,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    buildHeight(controller.isMetricUnit.value ? 'cm'.tr : 'in'.tr),
-                    SizedBox(
-                      height: dynamicHeight(0.02),
-                    ),
-                    buildWeight(controller.isMetricUnit.value ? 'kg'.tr : 'lbs'.tr),
-                    SizedBox(
-                      height: dynamicHeight(0.02),
-                    ),
-                  ],
+    return BaseView(onPageBuilder: (context) {
+      return Scaffold(
+        appBar: buildAppBar(),
+        body: SingleChildScrollView(
+          child: Obx(
+            () => Column(
+              children: [
+                Padding(
+                  padding: Paddings.textFormField,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      buildHeight(controller.isMetricUnit.value ? LanguageConstant.CM.tr : LanguageConstant.INCHES.tr),
+                      buildPadding(),
+                      buildWeight(controller.isMetricUnit.value ? LanguageConstant.KG.tr : LanguageConstant.POUND.tr),
+                    ],
+                  ),
                 ),
-              ),
-              buildTopPadding(),
-              buildSwitchUnit(),
-              const SizedBox(
-                height: 7,
-              ),
-              buildSwitchGender()
-            ],
+                buildSwitchUnit(),
+                buildPadding(),
+                buildSwitchGender()
+              ],
+            ),
           ),
         ),
-      ),
-      bottomNavigationBar: const ResultPage(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: buildFloatActionButton(context),
-    );
+        bottomNavigationBar: const ResultPage(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: buildFloatActionButton(context),
+      );
+    });
   }
 
-  SizedBox buildTopPadding() {
-    return SizedBox(
-      height: dynamicHeight(0.15),
+  SizedBox buildPadding() {
+    return const SizedBox(
+      height: 15,
     );
   }
 

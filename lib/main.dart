@@ -41,8 +41,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       locale: Locale(Platform.localeName),
       fallbackLocale: LocaleLanguage.ENGLISH,
-      onGenerateTitle: (BuildContext context) => AppConstants.instance.APP_NAME,
-
+      onGenerateTitle: (BuildContext context) => LanguageConstant.BMI.tr,
       initialRoute: RouteNames.PARAMETER_PAGE,
       theme: theme,
       getPages: routeList,
